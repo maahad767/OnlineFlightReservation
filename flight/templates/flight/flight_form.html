@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="main-agileinfo">
+    <div class="resp-tabs-container">	
+            <form action="" method="POST">
+                {% csrf_token %}
+            <div class="form-group">
+                <label for="{{form.boarding.label}}" class="text-light">{{form.boarding.label}}</label>
+                {% render_field form.boarding class+="form-control" placeholder="Dhaka" %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{form.destination.label}}" class="text-light">{{form.destination.label}}</label>
+                {% render_field form.destination class+="form-control" placeholder="Chittagong" %}
+            </div>
+            <div class="form-group">
+                <label for="{{form.flight_date.label}}" class="text-light">{{form.flight_date.label}}</label>
+                {% render_field form.flight_date  type="date" class+="form-control" %}
+            </div>
+            <div class="form-group">
+                <label for="{{form.flight_time.label}}" class="text-light">{{form.flight_time.label}}</label>
+                {% render_field form.flight_time  type="time" class+="form-control" step=1 %}
+            </div>
+            <div class="form-group">
+                <label for="{{form.status.label}}" class="text-light">{{form.status.label}}</label>
+                {% render_field form.status class+="form-control" %}
+            </div>
+            <div class="form-group">
+                <label for="{{form.booked_by.label}}" class="text-light">{{form.booked_by.label}}</label>
+                {% render_field form.booked_by class+="form-control" %}
+            </div>
+
+            <button type="submit" class="btn btn-info">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra %}
+  <script>
+      $('#id_flight_date').attr('type') = 'date'
+  </script>
+{% endblock extra %}

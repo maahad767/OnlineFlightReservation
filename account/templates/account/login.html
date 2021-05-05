@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main-agileinfo">
+    <div class="sap_tabs">	
+        <div class="clearfix"> </div>	
+        <div class="resp-tabs-container">	
+            {% if error %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{error}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+           {% endif %}
+            <form method="POST">
+            {% csrf_token %}
+            <div class="input-group flex-nowrap mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <div class="m-2"></div>
+            <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping"><i class="fas fa-lock"></i></span>
+            </div>
+            <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping">
+            </div>  
+
+            <div align="center"><button type="submit" class="btn btn-info mt-3" >Login</button>
+                        
+            </div>
+             </form>
+        </div>						
+    </div>
+</div>
+
+{% endblock content %}

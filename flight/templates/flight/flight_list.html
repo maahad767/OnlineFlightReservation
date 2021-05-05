@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}  
+<div class="main-agileinfo">
+    <div class="sap_tabs">	
+	
+            <div class="clearfix"> </div>	
+            <div class="resp-tabs-container">	
+                <div style=" background:rgba(3, 3, 3, 0.57); padding: 25px;">
+                    
+                        <table  class="table">
+                            <thead class="thead-light resp-tabs-list">
+                                <th scope="col" style="text-align: left;">Boarding</th>
+                                <th scope="col" style="text-align: left;">Destination</th>
+                                <th scope="col" style="text-align: left;">DateTime</th>
+                                <th scope="col"></th>
+                            </thead>
+                            <tbody style="color:azure;">
+                                
+                                {% for flight in object_list %}
+                                  <tr>
+                                    <td>{{ flight.boarding }}</td>
+                                    <td>{{ flight.destination }}</td>
+                                    <td>{{ flight.flight_date | date:"d M Y" }} at {{ flight.flight_time | time:"H:i" }}</td>
+                                    <td>
+                                        {% if not request.user.is_superuser %}
+                                            <a href="{% url 'reserve_flight' flight.id %}" class="btn btn-sm btn-success">Book Now</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td style="text-align: center;" colspan="4">No flights available for chosen condition!</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        <div class="clear" style="border-bottom: 1px solid silver; margin-bottom: 10px;"></div>
+
+                        <div align="center"><a href="{% url 'home' %}" class="btn btn-lg btn-info" >Search Flights</a>
+                            
+                </div>
+                
+            </div>						
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block extra %}
+{% endblock extra %}
+

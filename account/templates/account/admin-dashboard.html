@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-5">	
+    <div style=" background:rgba(3, 3, 3, 0.57);padding: 25px;">
+
+    <div class="alert alert-info text-center">
+        <strong style="font-weight: bold;">Flights List</strong>
+    </div>
+    <a href="{% url 'flight_create' %}" class="btn btn-info mb-3 float-right">Create Flight</a>
+        <table  class="table">
+        <thead class="thead-light resp-tabs-list" style="text-align: left;">
+            <th scope="col">Boarding</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Date & Time</th>
+            <th scope="col">Passenger</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+        </thead>
+        <tbody style="color:azure;">
+            
+            {% for flight in object_list %}
+                <tr>
+                <td>{{ flight.boarding }}</td>
+                <td>{{ flight.destination }}</td>
+                <td>{{ flight.flight_date | date:"d M Y" }} at {{ flight.flight_time | time:"H:i" }}</td>
+                <td>{{ flight.booked_by }}</td>
+                <td>
+                {% if flight.status == "available" %}
+                    <button class="btn btn-sm btn-outline-success">{{ flight.status }}</button>
+                    <a href="{% url 'admin_flight_reserve' flight.id %}" class="btn btn-sm btn-outline-info">Book</a>
+                {% else %}
+                    <button class="btn btn-sm btn-outline-info">{{ flight.status }}</button>
+                    <a href="{% url 'cancel_flight' flight.id %}" class="btn btn-sm btn-outline-danger">Cancel</a>
+                {% endif %}
+                    </td>
+                <td>
+               
+                    
+                    <a href="{% url 'flight_update' flight.id %}" class="btn btn-sm btn-warning">Update</a>
+                    <button data-toggle="modal" data-target="#deleteFlightModal" data-href="{% url 'delete_flight' flight.id %}" class="btn btn-sm btn-danger delete-action">Delete</button>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td style="text-align: center;" colspan="6">Seems like no flights have found, create some!</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="clear" style="border-bottom: 1px solid silver; margin-bottom: 10px;"></div>
+		
+</div>				
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteFlightModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="deleteFlightModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteFlightModalLabel">Delete Flight</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You won't be able to undo once you proceed. Are you sure want to delete the flight?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <a href="" class="btn btn-danger deletemodalaction">Confirm</a>
+      </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+{% block extra %}
+ <script>
+    $('body').on('click', '.delete-action', function() {
+    var datahref = $(this).attr('data-href');
+    $('.deletemodalaction').attr('href', datahref);
+    });
+
+ </script>
+{% endblock extra %}

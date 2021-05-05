@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="main-agileinfo">
+    <div class="sap_tabs">	
+        <div class="clearfix"> </div>	
+        <div class="resp-tabs-container">	
+           
+           {% if error %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{error}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+           {% endif %}
+               
+            <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">First Name</span>
+                        </div>
+                        <input type="text" name="first_name" aria-label="First name" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Last Name</span>
+                        </div>
+                        <input type="text" name="last_name" aria-label="Last name" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
+                </div>
+                <input type="email" name="email" class="form-control" placeholder="Enter email..." aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" name="username" class="form-control" placeholder="Enter username..." aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                </div>
+                <input type="password" name="password1" class="form-control" placeholder="Enter password..." aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            
+            
+            
+           
+            <button type="submit" class="btn btn-info">Register</button>
+            </form>        
+        </div>						
+    </div>
+</div>
+{% endblock content %}

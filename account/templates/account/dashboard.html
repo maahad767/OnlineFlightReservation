@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="main-agileinfo">
+    <div class="sap_tabs">	
+        <div class="clearfix"> </div>	
+        <div class="resp-tabs-container">	
+            <div style=" background:rgba(3, 3, 3, 0.57); padding: 25px;">
+
+            <div class="alert alert-info text-center">
+                <strong style="font-weight: bold;">Flights You've Booked/Reserved</strong>
+            </div>
+             <table  class="table">
+                <thead class="thead-light resp-tabs-list">
+                    <th scope="col" style="width: 30%; text-align: left;">Boarding</th>
+                    <th scope="col" style="width: 30%; text-align: left;">Destination</th>
+                    <th scope="col" style="width: 20%; text-align: left;">DateTime</th>
+                    <th scope="col" style="width: 20%;"></th>
+                </thead>
+                <tbody style="color:azure;">
+                    
+                    {% for flight in object_list %}
+                        <tr>
+                        <td>{{ flight.boarding }}</td>
+                        <td>{{ flight.destination }}</td>
+                        <td>{{ flight.flight_date | date:"d M Y" }} at {{ flight.flight_time | time:"H:i" }}</td>
+                        <td><a href="{% url 'cancel_flight' flight.id %}" class="btn btn-sm btn-danger">Cancel</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td style="text-align: center;" colspan="4">You haven't booked any flights yet!</td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+
+            <div class="alert alert-danger text-center">
+                <strong style="font-weight: bold;">Flights You've Cancelled</strong>
+            </div>
+             <table  class="table">
+                <thead class="thead-light resp-tabs-list">
+                    <th scope="col" style="width: 35%; text-align: left;">Boarding</th>
+                    <th scope="col" style="width: 35%; text-align: left;">Destination</th>
+                    <th scope="col" style="width: 30%; text-align: left;">DateTime</th>
+                </thead>
+                <tbody style="color:azure;">
+                    
+                    {% for flight in cancelled_list %}
+                        <tr>
+                        <td>{{ flight.boarding }}</td>
+                        <td>{{ flight.destination }}</td>
+                        <td>{{ flight.flight_date | date:"d M Y" }} at {{ flight.flight_time | time:"H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td style="text-align: center;" colspan="4">You haven't cancelled any flights yet, keep up the good work!</td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+            
+            <div class="clear" style="border-bottom: 1px solid silver; margin-bottom: 10px;"></div>
+
+            <div align="center"><a href="{% url 'home' %}" class="btn btn btn-info" >Book a Flight</a>
+                
+
+        </div>						
+    </div>
+</div>
+{% endblock content %}

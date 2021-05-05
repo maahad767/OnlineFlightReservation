@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
+from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 from django.utils.translation import ugettext as _
@@ -34,7 +35,7 @@ class UserManager(BaseUserManager):
         return self._create_user(username, email, password, **extra_fields)
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_("username"), max_length=100, unique=True)
     email = models.EmailField(
         verbose_name='email address',
@@ -63,9 +64,6 @@ class User(AbstractBaseUser):
     )
 
     is_superuser = models.BooleanField(default=False)
-
-    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
-    last_login = models.DateTimeField(_('last seen'), auto_now=True)
 
     objects = UserManager()
 

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}  
+<div class="main-agileinfo">
+    <div class="sap_tabs">			
+        <div id="horizontalTab">
+            <ul class="resp-tabs-list">
+                <li class="resp-tab-item"><span>One way</span></li>
+            </ul>	
+            <div class="clearfix"> </div>	
+            <div class="resp-tabs-container">	
+                <div class="tab-1 resp-tab-content oneway">
+                    <form action="{% url 'flight_list' %}" method="GET" enctype="multipart/form-data">
+                        <div class="from">
+                            <h3>From</h3>
+                            <input type="text" name="boarding" class="city1 form-control" placeholder="Departure City" >
+                        </div>
+                        <div class="to">
+                            <h3>To</h3>
+                            <input type="text" name="destination" class="city2 form-control" placeholder="Destination City" >
+                        </div>
+                        <div class="date">
+                            <div class="depart">
+                                <h3>Depart</h3>
+                                <input class="date form-control" id="datepicker2" name="flight_date" type="text" placeholder="mm/dd/yyyy" autocomplete="off" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}">
+                            </div>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        <div align="center"><input type="submit" value="Search Flights"></div>
+                    </form>	
+                            
+                </div>
+                
+            </div>						
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block extra %}
+  <!--script for portfolio-->
+		
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('#horizontalTab').easyResponsiveTabs({
+					type: 'default', //Types: default, vertical, accordion           
+					width: 'auto', //auto or any width like 600px
+					fit: true   // 100% fit in a container
+				});
+			});		
+		</script>
+		<!--//script for portfolio-->
+				<!-- Calendar -->
+				<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" />
+				<script src="{% static 'js/jquery-ui.js' %}"></script>
+				  <script>
+						  $(function() {
+							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+						  });
+				  </script>
+			<!-- //Calendar -->
+			<!--quantity-->
+									<script>
+									$('.value-plus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+										divUpd.text(newVal);
+									});
+
+									$('.value-minus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+										if(newVal>=1) divUpd.text(newVal);
+									});
+									</script>
+								<!--//quantity-->
+						<!--load more-->
+								<script>
+	$(document).ready(function () {
+		size_li = $("#myList li").size();
+		x=1;
+		$('#myList li:lt('+x+')').show();
+		$('#loadMore').click(function () {
+			x= (x+1 <= size_li) ? x+1 : size_li;
+			$('#myList li:lt('+x+')').show();
+		});
+		$('#showLess').click(function () {
+			x=(x-1<0) ? 1 : x-1;
+			$('#myList li').not(':lt('+x+')').hide();
+		});
+	});
+</script>
+<!-- //load-more -->
+
+{% endblock extra %}
+

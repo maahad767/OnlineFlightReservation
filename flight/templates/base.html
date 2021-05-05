@@ -1,0 +1,66 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flight Ticket Booking a Flat Responsive Widget Template :: w3layouts</title>
+	{% bootstrap_css %}
+	{% bootstrap_javascript jquery='full' %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+	{% block extrahead %}{% endblock extrahead %}		
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+	<!-- Navbar content -->
+	<a class="navbar-brand" href="{% url 'home' %}">Online Flight Reservation System</a>
+	 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      
+	  {% if request.user.is_authenticated %}
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+      </li>		  
+	  {% endif %}
+		  
+    </ul>
+	   {% if request.user.is_authenticated %}
+		<a href="{% url 'logout' %}" class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</a>	
+	   {% else %}
+		<a href="{% url 'register' %}" class="btn btn-outline-light my-2 my-sm-0" type="submit">Register</a>
+   		<a href="{% url 'login' %}" class="btn btn-outline-light my-2 my-sm-0 ml-2" type="submit">Login</a>
+	   {% endif %}
+  </div>
+</nav>
+
+{% block content %}{% endblock content %}
+
+
+
+<div class="footer-w3l">
+    <p class="agileinfo"> &copy; 2021 Online Flight Reservation System . All Rights Reserved | Thanks <a href="http://w3layouts.com">W3layouts</a>, <a href="https://getbootstrap.com">Bootstrap</a> </p>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"> </script>
+<script src="{% static 'js/easyResponsiveTabs.js' %}" type="text/javascript"></script>
+{% block extra %}{% endblock extra %}
+
+</body>
+</html>
+<!--
+	Author: W3layouts
+	Author URL: http://w3layouts.com
+	License: Creative Commons Attribution 3.0 Unported
+	License URL: http://creativecommons.org/licenses/by/3.0/
+-->
