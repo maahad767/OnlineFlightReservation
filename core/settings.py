@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-*gz24u=614z*q+n4)m$=ihwqj#n2a)6ic2*dg5lkg7f+=+0)sf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -143,8 +143,3 @@ LOGIN_URL = 'login'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-
-if os.environ.get('DEBUG') == 'TRUE':
-    DEBUG = True
-else:
-    DEBUG = False
