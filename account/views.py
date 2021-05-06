@@ -30,6 +30,7 @@ class RegisterView(View):
             user = User.objects.create_user(username=username, password=password,
                                             email=email, first_name=first_name, last_name=last_name)
             user.set_password(password)
+            user.save()
 
         except Exception as e:
             print(e)
