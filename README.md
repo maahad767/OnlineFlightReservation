@@ -1,4 +1,4 @@
-# OnlineFlightReservationCSE370
+# OnlineFlightReservation
 
 ## Requirements
 
